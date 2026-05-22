@@ -2,13 +2,12 @@ name: Core Boys Tracker Check
 
 on:
   push:
+    branches: [main]
     paths:
       - "apps/core-boys-tracker/**"
       - ".github/workflows/core-boys-tracker-check.yml"
   pull_request:
-    paths:
-      - "apps/core-boys-tracker/**"
-      - ".github/workflows/core-boys-tracker-check.yml"
+    branches: [main]
 
 jobs:
   check:
@@ -32,4 +31,3 @@ jobs:
 
       - name: Run quality gate
         run: npm run check
-
