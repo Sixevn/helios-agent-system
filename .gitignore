@@ -1,0 +1,19 @@
+# Node dependencies
+node_modules/
+**/node_modules/
+
+# Build outputs
+dist/
+**/dist/
+
+# App artifacts and generated exports
+artifacts/
+**/artifacts/
+*.tsbuildinfo
+_export_for_claude.txt
+
+# Logs and temp files
+*.log
+.DS_Store
+Thumbs.db
+
