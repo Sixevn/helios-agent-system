@@ -79,3 +79,5 @@ Do not build these first:
 - Complex Notion integration
 
 Those can come later after MVP workflows are proven.
+
+Branch protection test 2026-05-22T16:56:32
