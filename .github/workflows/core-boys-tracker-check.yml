@@ -1,4 +1,5 @@
 name: Core Boys Tracker Check
+# keep required check context available for protection validation flows
 
 on:
   push:
