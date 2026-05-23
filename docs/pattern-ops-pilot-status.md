@@ -43,3 +43,5 @@
 - `docs/pattern-ops-day1-intake-prefilled.md`
 - `docs/pattern-ops-today-runbook-15-20-min.md`
 - `docs/pattern-ops-friction-capture-prompts.md`
+- `docs/pattern-ops-opportunity1-day1-execution-pack.md`
+- `docs/pattern-ops-friction-log.md`
