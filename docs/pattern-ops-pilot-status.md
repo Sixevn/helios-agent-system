@@ -37,3 +37,9 @@
 - `docs/pattern-ops-day1-starter-candidates.md`
 - `templates/pattern-opportunity-intake-template.md`
 - `templates/pattern-ops-weekly-review-template.md`
+
+## Day 1 Execution Assets
+
+- `docs/pattern-ops-day1-intake-prefilled.md`
+- `docs/pattern-ops-today-runbook-15-20-min.md`
+- `docs/pattern-ops-friction-capture-prompts.md`
