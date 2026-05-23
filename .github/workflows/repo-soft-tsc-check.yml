@@ -1,0 +1,57 @@
+name: Repo Soft TypeScript Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  soft-tsc:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run soft tsc scan across apps/*
+        shell: bash
+        run: |
+          set +e
+          failures=0
+          scanned=0
+
+          for app_dir in apps/*; do
+            if [ -d "$app_dir" ] && [ -f "$app_dir/tsconfig.json" ]; then
+              scanned=$((scanned + 1))
+              echo ""
+              echo "=== Soft TSC: $app_dir ==="
+
+              if [ -f "$app_dir/package-lock.json" ]; then
+                npm --prefix "$app_dir" ci --silent
+              else
+                npm --prefix "$app_dir" install --silent
+              fi
+
+              npx --prefix "$app_dir" tsc --noEmit
+              tsc_exit=$?
+              if [ $tsc_exit -ne 0 ]; then
+                failures=$((failures + 1))
+                echo "::warning title=Soft TSC failed::$app_dir failed tsc --noEmit (non-blocking)"
+              fi
+            fi
+          done
+
+          echo ""
+          echo "Scanned TypeScript apps: $scanned"
+          if [ $failures -gt 0 ]; then
+            echo "::warning title=Repo soft check summary::$failures app(s) failed soft tsc scan (workflow remains non-blocking)"
+          else
+            echo "All scanned apps passed soft tsc."
+          fi
+
+          # Soft mode: never block merges yet.
+          exit 0
