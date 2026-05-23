@@ -280,6 +280,9 @@ export default function CheckpointOpsPanel({
 
       <section className="checkpoint-section">
         <h3>Data Capture Checklist</h3>
+        <p className="checkpoint-section-lead">
+          Confirm evidence quality before interpreting KPI movement.
+        </p>
         <div className="checklist-grid">
           <label>
             <input
@@ -326,6 +329,9 @@ export default function CheckpointOpsPanel({
 
       <section className="checkpoint-section">
         <h3>Baseline Logger (7-14 day input pool)</h3>
+        <p className="checkpoint-section-lead">
+          Add daily observations to stabilize the window before a checkpoint call.
+        </p>
         <form className="baseline-form" onSubmit={addBaselineLog}>
           <label>
             Date *
@@ -455,6 +461,9 @@ export default function CheckpointOpsPanel({
 
       <section className="checkpoint-section">
         <h3>Checkpoint Calculator</h3>
+        <p className="checkpoint-section-lead">
+          Compare current performance against baseline and verify every gate condition.
+        </p>
         <div className="checkpoint-form-grid">
           <label>
             Window start date

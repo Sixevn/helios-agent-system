@@ -91,6 +91,10 @@ export default function WeeklyCheckpointSummaryPanel({
         Convert this week&apos;s signals into a clear Keep/Improve/Stop call with confidence,
         context, and one concrete next action.
       </p>
+      <p className="checkpoint-section-lead summary-lead">
+        Summary output mirrors the same baseline gate policy and blocker language used in the
+        Checkpoint Ops panel.
+      </p>
 
       <div className="checkpoint-summary-form">
         <label>
