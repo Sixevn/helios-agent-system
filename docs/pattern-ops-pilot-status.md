@@ -23,7 +23,7 @@
 
 | Day | Date | Top Win | Main Blocker | Next Action |
 | --- | --- | --- | --- | --- |
-| 1 | 2026-05-23 | Pilot kickoff complete | N/A | Fill Day 1 candidate scoring |
+| 1 | 2026-05-23 | Day 1 intake prefilled for all 3 opportunities and runbook + friction prompts landed on main | Required-check context mismatch created merge friction in GitHub protection flow | Execute Opportunity 1 (Summer Demand Sprint): build Day 1 asset list + test matrix and log first Core Boys entries |
 | 2 |  |  |  |  |
 | 3 |  |  |  |  |
 | 4 |  |  |  |  |
