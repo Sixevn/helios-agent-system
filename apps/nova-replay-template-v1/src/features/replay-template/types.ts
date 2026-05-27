@@ -1,4 +1,13 @@
 export type SegmentType = "hook" | "context" | "payoff" | "pivot" | "cta";
+export type ChannelKey = "core-boys" | "soccer" | "gta6";
+
+export interface ChannelRecord {
+  id: ChannelKey;
+  name: string;
+  youtubeHandle: string;
+  createdAt: string;
+  updatedAt: string;
+}
 
 export interface ManualReplaySegment {
   id: string;
@@ -11,6 +20,7 @@ export interface ManualReplaySegment {
 
 export interface ReplayVideoRecord {
   id: string;
+  channelId: ChannelKey;
   videoUrl: string;
   title: string;
   durationSec: number;
@@ -66,7 +76,8 @@ export interface RankedRecommendation {
 }
 
 export interface ReplayTemplateStore {
-  version: 1;
+  version: 2;
+  channels: ChannelRecord[];
   videos: ReplayVideoRecord[];
   manualReplaySegments: ManualReplaySegment[];
   templates: TemplateRecord[];
