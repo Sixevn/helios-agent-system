@@ -1,12 +1,22 @@
 -- Nova Replay-to-Template v1 SQLite schema contract
 -- v1 runtime uses localStorage, but this schema is the locked migration target.
 
+CREATE TABLE IF NOT EXISTS channels (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  youtube_handle TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS videos (
   id TEXT PRIMARY KEY,
+  channel_id TEXT NOT NULL,
   video_url TEXT NOT NULL,
   title TEXT NOT NULL,
   duration_sec INTEGER NOT NULL,
-  created_at TEXT NOT NULL
+  created_at TEXT NOT NULL,
+  FOREIGN KEY (channel_id) REFERENCES channels (id)
 );
 
 CREATE TABLE IF NOT EXISTS manual_replay_segments (
@@ -52,3 +62,6 @@ CREATE INDEX IF NOT EXISTS idx_manual_segments_video
 
 CREATE INDEX IF NOT EXISTS idx_recommendations_video
   ON recommendations (video_id, created_at DESC);
+
+CREATE INDEX IF NOT EXISTS idx_videos_channel
+  ON videos (channel_id, created_at DESC);

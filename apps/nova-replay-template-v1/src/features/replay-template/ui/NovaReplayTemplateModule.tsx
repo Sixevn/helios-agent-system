@@ -13,6 +13,7 @@ import {
   upsertVideoRecord
 } from "../services/storage";
 import type {
+  ChannelKey,
   ManualReplaySegment,
   RecommendationRecord,
   ReplayTemplateStore
@@ -29,6 +30,12 @@ const EMPTY_SEGMENT: SegmentFormState = {
   endSec: "",
   note: ""
 };
+
+const CHANNEL_OPTIONS: { id: ChannelKey; label: string }[] = [
+  { id: "core-boys", label: "Core Boys" },
+  { id: "soccer", label: "Soccer" },
+  { id: "gta6", label: "GTA 6" }
+];
 
 function nowIso(): string {
   return new Date().toISOString();
@@ -50,6 +57,7 @@ function median(values: number[]): number {
 
 export default function NovaReplayTemplateModule(): JSX.Element {
   const [store, setStore] = useState<ReplayTemplateStore>(() => loadReplayTemplateStore());
+  const [channelId, setChannelId] = useState<ChannelKey>("core-boys");
   const [videoUrl, setVideoUrl] = useState("");
   const [videoTitle, setVideoTitle] = useState("");
   const [videoDurationSec, setVideoDurationSec] = useState("60");
@@ -62,7 +70,14 @@ export default function NovaReplayTemplateModule(): JSX.Element {
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
 
   const videoId = useMemo(() => parseYouTubeVideoId(videoUrl), [videoUrl]);
+  const scopedVideoId = useMemo(
+    () => (videoId ? `${channelId}:${videoId}` : null),
+    [channelId, videoId]
+  );
   const durationSec = parseNumber(videoDurationSec) ?? 0;
+  const channelName =
+    store.channels.find((channel) => channel.id === channelId)?.name ?? "Unassigned Channel";
+  const channelVideoCount = store.videos.filter((video) => video.channelId === channelId).length;
 
   const recentElapsed = useMemo(
     () => store.recommendations.slice(0, 10).map((item) => item.elapsedSeconds),
@@ -87,6 +102,10 @@ export default function NovaReplayTemplateModule(): JSX.Element {
       setError("Paste a valid YouTube URL or 11-char video ID first.");
       return;
     }
+    if (!scopedVideoId) {
+      setError("Channel-scoped video ID is missing.");
+      return;
+    }
     if (!durationSec || durationSec <= 0) {
       setError("Enter a valid video duration in seconds.");
       return;
@@ -101,7 +120,7 @@ export default function NovaReplayTemplateModule(): JSX.Element {
 
     const candidate: ManualReplaySegment = {
       id: `seg-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
-      videoId,
+      videoId: scopedVideoId,
       startSec: start,
       endSec: end,
       note: segmentForm.note.trim(),
@@ -130,6 +149,10 @@ export default function NovaReplayTemplateModule(): JSX.Element {
       setError("Video URL/ID is required.");
       return;
     }
+    if (!scopedVideoId) {
+      setError("Channel-scoped video key is required.");
+      return;
+    }
     if (!durationSec || durationSec <= 0) {
       setError("Duration must be greater than 0.");
       return;
@@ -153,7 +176,8 @@ export default function NovaReplayTemplateModule(): JSX.Element {
     setBrief(briefText);
 
     const videoRecord = {
-      id: videoId,
+      id: scopedVideoId,
+      channelId,
       videoUrl,
       title: videoTitle.trim() || `Video ${videoId}`,
       durationSec,
@@ -162,7 +186,7 @@ export default function NovaReplayTemplateModule(): JSX.Element {
 
     const recommendationRows: RecommendationRecord[] = ranked.map((entry, index) => ({
       id: `rec-${Date.now()}-${index}`,
-      videoId,
+      videoId: scopedVideoId,
       templateId: entry.template.id,
       templateName: entry.template.templateName,
       rank: index + 1,
@@ -174,8 +198,8 @@ export default function NovaReplayTemplateModule(): JSX.Element {
     }));
 
     let nextStore = upsertVideoRecord(store, videoRecord);
-    nextStore = replaceVideoSegments(nextStore, videoId, segments);
-    nextStore = saveRecommendations(nextStore, videoId, recommendationRows);
+    nextStore = replaceVideoSegments(nextStore, scopedVideoId, segments);
+    nextStore = saveRecommendations(nextStore, scopedVideoId, recommendationRows);
     updateAndPersist(nextStore);
 
     try {
@@ -217,6 +241,19 @@ export default function NovaReplayTemplateModule(): JSX.Element {
         <article className="panel">
           <h2>1) Video Intake</h2>
           <label>
+            Channel
+            <select
+              value={channelId}
+              onChange={(event) => setChannelId(event.target.value as ChannelKey)}
+            >
+              {CHANNEL_OPTIONS.map((option) => (
+                <option key={option.id} value={option.id}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
             YouTube URL or Video ID
             <input
               value={videoUrl}
@@ -243,6 +280,10 @@ export default function NovaReplayTemplateModule(): JSX.Element {
               inputMode="numeric"
             />
           </label>
+          <p className="status-line">
+            Channel DB: {channelName} ({channelVideoCount} video
+            {channelVideoCount === 1 ? "" : "s"})
+          </p>
           <p className="status-line">Parsed video ID: {videoId ?? "Invalid / missing"}</p>
         </article>
 

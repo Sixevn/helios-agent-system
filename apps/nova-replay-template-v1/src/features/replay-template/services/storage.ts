@@ -1,4 +1,6 @@
 import type {
+  ChannelKey,
+  ChannelRecord,
   ManualReplaySegment,
   RecommendationRecord,
   ReplayTemplateStore,
@@ -11,6 +13,33 @@ const STORAGE_KEY = "nova_replay_template_v1";
 
 function nowIso(): string {
   return new Date().toISOString();
+}
+
+function createDefaultChannels(): ChannelRecord[] {
+  const timestamp = nowIso();
+  return [
+    {
+      id: "core-boys",
+      name: "Core Boys",
+      youtubeHandle: "@createownruneverything",
+      createdAt: timestamp,
+      updatedAt: timestamp
+    },
+    {
+      id: "soccer",
+      name: "Soccer",
+      youtubeHandle: "@soccer",
+      createdAt: timestamp,
+      updatedAt: timestamp
+    },
+    {
+      id: "gta6",
+      name: "GTA 6",
+      youtubeHandle: "@RockstarGames",
+      createdAt: timestamp,
+      updatedAt: timestamp
+    }
+  ];
 }
 
 function createDefaultTemplates(): TemplateRecord[] {
@@ -75,7 +104,8 @@ function createDefaultTemplates(): TemplateRecord[] {
 
 function emptyStore(): ReplayTemplateStore {
   return {
-    version: 1,
+    version: 2,
+    channels: createDefaultChannels(),
     videos: [],
     manualReplaySegments: [],
     templates: createDefaultTemplates(),
@@ -83,20 +113,54 @@ function emptyStore(): ReplayTemplateStore {
   };
 }
 
+interface LegacyReplayTemplateStoreV1 {
+  version: 1;
+  videos?: Array<{
+    id: string;
+    videoUrl: string;
+    title: string;
+    durationSec: number;
+    createdAt: string;
+  }>;
+  manualReplaySegments?: ManualReplaySegment[];
+  templates?: TemplateRecord[];
+  recommendations?: RecommendationRecord[];
+}
+
+function withDefaults(partial: Partial<ReplayTemplateStore>): ReplayTemplateStore {
+  return {
+    version: 2,
+    channels: partial.channels?.length ? partial.channels : createDefaultChannels(),
+    videos: partial.videos ?? [],
+    manualReplaySegments: partial.manualReplaySegments ?? [],
+    templates: partial.templates?.length ? partial.templates : createDefaultTemplates(),
+    recommendations: partial.recommendations ?? []
+  };
+}
+
+function migrateV1ToV2(input: LegacyReplayTemplateStoreV1): ReplayTemplateStore {
+  const defaultChannelId: ChannelKey = "core-boys";
+  const migratedVideos = (input.videos ?? []).map((video) => ({
+    ...video,
+    channelId: defaultChannelId
+  }));
+  return withDefaults({
+    videos: migratedVideos,
+    manualReplaySegments: input.manualReplaySegments ?? [],
+    templates: input.templates ?? [],
+    recommendations: input.recommendations ?? []
+  });
+}
+
 export function loadReplayTemplateStore(): ReplayTemplateStore {
   const raw = globalThis.localStorage?.getItem(STORAGE_KEY);
   if (!raw) return emptyStore();
 
   try {
-    const parsed = JSON.parse(raw) as ReplayTemplateStore;
-    if (parsed?.version !== 1) return emptyStore();
-    return {
-      version: 1,
-      videos: parsed.videos ?? [],
-      manualReplaySegments: parsed.manualReplaySegments ?? [],
-      templates: parsed.templates?.length ? parsed.templates : createDefaultTemplates(),
-      recommendations: parsed.recommendations ?? []
-    };
+    const parsed = JSON.parse(raw) as ReplayTemplateStore | LegacyReplayTemplateStoreV1;
+    if (parsed?.version === 2) return withDefaults(parsed);
+    if (parsed?.version === 1) return migrateV1ToV2(parsed);
+    return emptyStore();
   } catch {
     return emptyStore();
   }
