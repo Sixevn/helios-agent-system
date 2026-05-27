@@ -1,0 +1,20 @@
+name: Branch Gate
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  branch-gate:
+    name: branch-gate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Branch protection gate heartbeat
+        run: |
+          echo "Branch Gate check is running."
+          echo "PR #${{ github.event.pull_request.number }} -> ${GITHUB_BASE_REF}"
+          echo "This job always runs and reports a stable required check context."
