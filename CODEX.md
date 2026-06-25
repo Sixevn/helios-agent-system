@@ -12,6 +12,10 @@ Codex should not invent a bigger system than requested.
 
 Always start with the smallest useful version.
 
+## Task Boundary Rule
+
+Every Codex task must commit its own work before the next task begins. Do not leave task changes uncommitted in the working tree; if a task pauses mid-stream, make a clear WIP commit. This keeps work isolated, reviewable, and protected from unrelated file tangles.
+
 ## Codex Responsibilities
 
 Codex can help with:
