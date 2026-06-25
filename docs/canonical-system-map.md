@@ -1,4 +1,4 @@
-﻿# Canonical System Map
+# Canonical System Map
 
 Use this page as the one-click onboarding index for the Helios Agent System.
 
@@ -40,6 +40,7 @@ If you only have 5 minutes, stop after step 5.
 - [Midas](../agents/midas.md)
 - [Vitalis](../agents/vitalis.md)
 - [Strategos](../agents/strategos.md)
+- [Vantage](../agents/vantage.md)
 - [Kirin](../agents/kirin.md)
 - [Orion](../agents/orion.md)
 
@@ -98,9 +99,8 @@ If you only have 5 minutes, stop after step 5.
 
 ## Deep Links: Checkpoint Artifacts
 
-- [Checkpoint Artifact Path Rules](./checkpoints/README.md)
+- [Checkpoint Artifact Path Rules](./checkpoints/Checkpoint%20Artifact%20Path.md)
 
 ## Deep Links: Prompt Utilities
 
 - [Codex Prompt Playbook](./codex-prompt-playbook.md)
-

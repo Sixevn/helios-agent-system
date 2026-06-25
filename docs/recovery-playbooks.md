@@ -97,6 +97,111 @@ This file maps known failure patterns to known recovery steps.
 - For runtime confirmation, use listener/URL checks instead of process exit status.
 - Explicitly tell the user when a timeout is expected behavior for watch/dev mode.
 
+## Playbook 6: PowerShell foreach output piped to JSON fails
+
+### Symptoms
+
+- PowerShell reports `An empty pipe element is not allowed.`
+- A command ends a `foreach` statement and then pipes directly to `ConvertTo-Json`, `Format-Table`, or another pipeline consumer.
+
+### Fast Recovery
+
+1. Wrap the object-producing block:
+   - `& { foreach ($item in $items) { [pscustomobject]@{ Value = $item } } } | ConvertTo-Json`
+2. Or collect results first:
+   - `$results = foreach ($item in $items) { [pscustomobject]@{ Value = $item } }`
+   - `$results | ConvertTo-Json`
+
+### Prevention
+
+- Do not pipe directly from a PowerShell control statement shape.
+- Wrap `foreach` output producers in `& { ... }` before piping.
+
+## Playbook 7: Bash heredoc syntax used in PowerShell
+
+### Symptoms
+
+- PowerShell reports `Missing file specification after redirection operator`.
+- PowerShell reports `The '<' operator is reserved for future use`.
+- The attempted command uses Bash heredoc syntax like `python - <<'PY'`.
+
+### Fast Recovery
+
+1. Replace the Bash heredoc with a PowerShell here-string:
+   - `@'`
+   - script body
+   - `'@ | python -`
+2. Rerun the command in PowerShell.
+
+### Prevention
+
+- Do not use Bash heredoc syntax in PowerShell.
+- For inline scripts in PowerShell, use here-strings piped to the interpreter.
+
+## Playbook 8: Python stdout Unicode encoding fails on Windows
+
+### Symptoms
+
+- Python raises `UnicodeEncodeError: 'charmap' codec can't encode characters`.
+- The script is printing extracted document, transcript, web, or JSON text containing Unicode.
+
+### Fast Recovery
+
+1. Set UTF-8 output for Python:
+   - `$env:PYTHONIOENCODING='utf-8'`
+2. Rerun the Python command.
+
+### Prevention
+
+- Set `PYTHONIOENCODING=utf-8` before printing Unicode-heavy text from Python in PowerShell.
+- Prefer JSON output with UTF-8 enabled when extracting documents or transcripts.
+
+## Playbook 9: Agent docs mirror set drift
+
+### Symptoms
+
+- A repo asks agent instruction files to stay byte-identical.
+- Tests fail after updating only the obvious mirrors such as `AGENTS.md`, `CLAUDE.md`, and `GEMINI.md`.
+- Hidden or legacy mirrors such as `.cursorrules` or `.windsurfrules` differ from `AGENTS.md`.
+
+### Fast Recovery
+
+1. Find the repo's mirror source of truth, usually `AGENTS.md`.
+2. Inspect the mirror-consistency test or postbuild sync script for the complete enforced file list.
+3. Copy the source file to every enforced mirror.
+4. Re-run the mirror-consistency test or full suite.
+
+### Prevention
+
+- Before editing agent instruction mirrors, search for `agent-docs-consistency`, `postbuild`, `CLAUDE.md`, `.cursorrules`, and `.windsurfrules`.
+- Treat the test-enforced mirror list as canonical when it differs from a handoff note.
+
+## Playbook 10: Knova card write missing required frontmatter
+
+### Symptoms
+
+- `memex write <slug>` or `node dist/cli.js write <slug>` fails during a card smoke test.
+- The CLI reports `Missing required fields: title, created, source`.
+- The card includes the Helios `type` field but omits older required memex fields.
+
+### Fast Recovery
+
+1. Rewrite the card with full required frontmatter:
+   - `title`
+   - `type`
+   - `created`
+   - `source`
+2. Include optional Helios fields such as `maturity` and `tags` when useful.
+3. Verify with:
+   - `node dist/cli.js search <term> --compact`
+   - `node dist/cli.js read <slug>`
+   - `node dist/cli.js doctor`
+
+### Prevention
+
+- Treat `title`, `type`, `created`, and `source` as the minimum write contract for Knova-Memory cards.
+- Do not assume adding `type` replaces the existing memex required fields.
+
 ## Notion Integration Path (Planning Only)
 
 When ready, mirror the error system into Notion with:

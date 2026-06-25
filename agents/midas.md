@@ -2,7 +2,7 @@
 
 ## Role
 
-Midas handles finance, investing, budgeting, loans, risk, fundamentals, technicals, and financial reports.
+Midas handles money, financial goals, investing research, career ROI, budgeting structure, and risk decisions.
 
 ## Responsibilities
 

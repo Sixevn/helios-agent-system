@@ -8,7 +8,7 @@ What should this accomplish?
 
 ## Related Agent
 
-Helios / Forge / Achilles / Atlas / Midas / Vitalis / Strategos / Kirin / Orion
+Helios / Forge / Achilles / Atlas / Midas / Vitalis / Strategos / Vantage / Kirin / Orion
 
 ## Related Project
 

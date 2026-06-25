@@ -7,14 +7,15 @@ This repo supports the full Helios Agent System. Treat each agent file as a role
 ## Agent Team Summary
 
 - Helios = Leader and main orchestrator
-- Forge = Technical builder for code, apps, scripts, tools, and prototypes
+- Forge = Technical builder for code, apps, scripts, tools, dashboards, prototypes, and implementation support
 - Achilles = Notion and system builder for pages, databases, dashboards, templates, and workflows
 - Atlas = Researcher and information retriever for sources, files, summaries, and context
-- Midas = Finance brain for budgeting, investing, loans, fundamentals, technicals, and risk
+- Midas = Money, financial goals, investing research, career ROI, budgeting structure, and risk decisions
 - Vitalis = Health, meals, fitness, recovery, sleep, nutrition, and routine brain
-- Strategos = Strategy, planning, priorities, tradeoffs, decisions, and execution brain
-- Kirin = Creative brain for ideas, hooks, brand concepts, journaling, and reflection
-- Orion = Career brain for resume tailoring, job search, applications, networking, and interview prep
+- Strategos = Strategy, goals, prioritization, decision-making, weekly focus, and tradeoff analysis
+- Vantage = Business evaluation, market mapping, competitive analysis, business model design, and go/no-go decisions
+- Kirin = Content, ventures, hooks, templates, posting systems, and creative production
+- Orion = Jobs, internships, career opportunities, applications, resumes, outreach, interviews, and role comparisons
 
 ## Core Rules
 
@@ -27,16 +28,41 @@ This repo supports the full Helios Agent System. Treat each agent file as a role
 - Treat meaningful errors as reusable assets.
 - Keep external advisor models advisory-only unless Helios explicitly escalates scope.
 
+## Helios Version A Wrapper (pilot)
+
+Version A is a thin Codex-internal wrapper. Codex remains the execution lane; there is no external service, no execution bridge, no intake-router wiring, and no automatic Claude call.
+
+Pilot coverage is limited to four agents:
+- Helios
+- Forge
+- Achilles
+- Atlas
+
+Runtime loop for non-trivial tasks:
+1. Receive the task as Helios.
+2. Route using pilot agent frontmatter plus the existing prose routing rules.
+3. Assemble context in this order: task constraints, Knova operating rules, Error Index, this file, `CODEX.md`, `docs/agent-routing-system.md`, pilot agent frontmatter, selected agent file body, relevant project/docs/templates, then the Knova-Memory protocol.
+4. Retrieve from Knova-Memory before work using both topic queries and operation/procedure queries. Prefer reusable `learning` and `error` cards.
+5. Do the work through the routed agent sequence inside the current Codex session.
+6. Write exactly one Knova-Memory `learning` or `error` card for every non-trivial task.
+7. Write a lightweight execution note in `04 Execution/Active/` only when the task is multi-step, changes files, or has meaningful risk.
+8. Report route, context used, result, validation, memory card slug, and execution note path when applicable.
+
+If a task is ambiguous, Helios keeps ownership and either asks one concise clarification question or chooses the safest route when the ambiguity is low-risk. If multiple agents are needed, Helios defines the sequence and keeps final summary ownership.
+
+Claude remains advisory-only and manual. Version A may recommend a Claude handoff, but it must not call Claude automatically.
+
 ## Routing Rules
 
-- Route code, apps, scripts, tools, prototypes, and repo implementation to Forge.
+- Route code, apps, scripts, tools, prototypes, and repo implementation to Codex.
 - Route Notion pages, databases, dashboards, templates, and workflow architecture to Achilles.
 - Route research, retrieval, source summaries, and context mapping to Atlas.
-- Route finance decisions, risk, budgeting, investing, and loan analysis to Midas.
+- Route money decisions, financial goals, investing research, career ROI, budgeting structure, and risk decisions to Midas.
 - Route meals, routines, fitness, recovery, nutrition, and sleep systems to Vitalis.
-- Route priorities, planning, tradeoffs, and execution frameworks to Strategos.
-- Route idea generation, hooks, branding, brainstorming, and reflection to Kirin.
-- Route resume tailoring, job applications, networking workflow, and interview prep to Orion.
+- Route strategy, goals, prioritization, decision-making, weekly focus, and tradeoff analysis to Strategos.
+- Route business evaluation, market mapping, competitive analysis, business model design, and go/no-go decisions to Vantage.
+- Route content, ventures, hooks, templates, posting systems, and creative production to Kirin.
+- Route jobs, internships, career opportunities, applications, resumes, outreach, interviews, and role comparisons to Orion.
 - Route external second-opinion writing/review/synthesis requests through Helios first.
 
 ## External Advisor Rule (Claude)
@@ -46,7 +72,7 @@ Claude is an external advisory lane, not a core execution owner in phase 1.
 - Primary use: second-opinion writing, review, and synthesis.
 - Not default owner for repo implementation, integration, or validation.
 - Helios decides when Claude input is needed.
-- Achilles/Forge execute final system and build changes after Helios review.
+- Achilles/Codex execute final system and build changes after Helios review.
 
 Default handoff format to Claude:
 1. Goal
@@ -54,14 +80,15 @@ Default handoff format to Claude:
 3. Current draft or output
 4. Ask: strengths, weaknesses, and best revision direction
 
-## Forge vs Achilles
+## Forge vs Kirin vs Achilles
 
-Forge and Achilles must remain separate.
+Forge, Kirin, and Achilles must remain separate.
 
-- Forge is the technical builder.
+- Forge is the technical builder for tools, apps, scripts, dashboards, prototypes, and implementation support.
+- Kirin is the content creation and creative strategy owner.
 - Achilles is the Notion/system architect.
 
-Use Achilles for structure and workflow design. Use Forge for technical implementation.
+Use Kirin for creative/content direction. Use Achilles for structure and workflow design. Use Forge/Codex for technical implementation.
 
 ## Response Style
 
@@ -109,7 +136,7 @@ After every change, summarize:
 
 ## Error Intelligence Rule
 
-For non-trivial errors, Achilles and Forge should use the Error Intelligence System:
+For non-trivial errors, Achilles and Codex should use the Error Intelligence System:
 
 1. Log the error with the error card template.
 2. Document root cause and fix.

@@ -2,7 +2,7 @@
 
 ## Role
 
-Strategos handles planning, priorities, execution strategy, tradeoffs, and decision-making.
+Strategos handles strategy, goals, prioritization, decision-making, weekly focus, and tradeoff analysis.
 
 ## Responsibilities
 
