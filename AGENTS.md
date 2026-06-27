@@ -28,6 +28,30 @@ This repo supports the full Helios Agent System. Treat each agent file as a role
 - Treat meaningful errors as reusable assets.
 - Keep external advisor models advisory-only unless Helios explicitly escalates scope.
 
+## Helios Version A Wrapper (pilot)
+
+Version A is a thin Codex-internal wrapper. Codex remains the execution lane; there is no external service, no execution bridge, no intake-router wiring, and no automatic Claude call.
+
+Pilot coverage is limited to four agents:
+- Helios
+- Forge
+- Achilles
+- Atlas
+
+Runtime loop for non-trivial tasks:
+1. Receive the task as Helios.
+2. Route using pilot agent frontmatter plus the existing prose routing rules.
+3. Assemble context in this order: task constraints, Knova operating rules, Error Index, this file, `CODEX.md`, `docs/agent-routing-system.md`, pilot agent frontmatter, selected agent file body, relevant project/docs/templates, then the Knova-Memory protocol.
+4. Retrieve from Knova-Memory before work using both topic queries and operation/procedure queries. Prefer reusable `learning` and `error` cards.
+5. Do the work through the routed agent sequence inside the current Codex session.
+6. Write exactly one Knova-Memory `learning` or `error` card for every non-trivial task.
+7. Write a lightweight execution note in `04 Execution/Active/` only when the task is multi-step, changes files, or has meaningful risk.
+8. Report route, context used, result, validation, memory card slug, and execution note path when applicable.
+
+If a task is ambiguous, Helios keeps ownership and either asks one concise clarification question or chooses the safest route when the ambiguity is low-risk. If multiple agents are needed, Helios defines the sequence and keeps final summary ownership.
+
+Claude remains advisory-only and manual. Version A may recommend a Claude handoff, but it must not call Claude automatically.
+
 ## Routing Rules
 
 - Route code, apps, scripts, tools, dashboards, prototypes, and repo implementation to Forge.
