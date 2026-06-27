@@ -7,14 +7,15 @@ This repo supports the full Helios Agent System. Treat each agent file as a role
 ## Agent Team Summary
 
 - Helios = Leader and main orchestrator
-- Forge = Technical builder for code, apps, scripts, tools, and prototypes
+- Forge = Technical builder for code, apps, scripts, tools, dashboards, prototypes, and implementation support
 - Achilles = Notion and system builder for pages, databases, dashboards, templates, and workflows
 - Atlas = Researcher and information retriever for sources, files, summaries, and context
-- Midas = Finance brain for budgeting, investing, loans, fundamentals, technicals, and risk
+- Midas = Money, financial goals, investing research, career ROI, budgeting structure, and risk decisions
 - Vitalis = Health, meals, fitness, recovery, sleep, nutrition, and routine brain
-- Strategos = Strategy, planning, priorities, tradeoffs, decisions, and execution brain
-- Kirin = Creative brain for ideas, hooks, brand concepts, journaling, and reflection
-- Orion = Career brain for resume tailoring, job search, applications, networking, and interview prep
+- Strategos = Strategy, goals, prioritization, decision-making, weekly focus, and tradeoff analysis
+- Vantage = Business evaluation, market mapping, competitive analysis, business model design, and go/no-go decisions
+- Kirin = Content, ventures, hooks, templates, posting systems, and creative production
+- Orion = Jobs, internships, career opportunities, applications, resumes, outreach, interviews, and role comparisons
 
 ## Core Rules
 
@@ -29,14 +30,15 @@ This repo supports the full Helios Agent System. Treat each agent file as a role
 
 ## Routing Rules
 
-- Route code, apps, scripts, tools, prototypes, and repo implementation to Forge.
+- Route code, apps, scripts, tools, dashboards, prototypes, and repo implementation to Forge.
 - Route Notion pages, databases, dashboards, templates, and workflow architecture to Achilles.
 - Route research, retrieval, source summaries, and context mapping to Atlas.
-- Route finance decisions, risk, budgeting, investing, and loan analysis to Midas.
+- Route money decisions, financial goals, investing research, career ROI, budgeting structure, and risk decisions to Midas.
 - Route meals, routines, fitness, recovery, nutrition, and sleep systems to Vitalis.
-- Route priorities, planning, tradeoffs, and execution frameworks to Strategos.
-- Route idea generation, hooks, branding, brainstorming, and reflection to Kirin.
-- Route resume tailoring, job applications, networking workflow, and interview prep to Orion.
+- Route strategy, goals, prioritization, decision-making, weekly focus, and tradeoff analysis to Strategos.
+- Route business evaluation, market mapping, competitive analysis, business model design, and go/no-go decisions to Vantage.
+- Route content, ventures, hooks, templates, posting systems, and creative production to Kirin.
+- Route jobs, internships, career opportunities, applications, resumes, outreach, interviews, and role comparisons to Orion.
 - Route external second-opinion writing/review/synthesis requests through Helios first.
 
 ## External Advisor Rule (Claude)
@@ -54,14 +56,15 @@ Default handoff format to Claude:
 3. Current draft or output
 4. Ask: strengths, weaknesses, and best revision direction
 
-## Forge vs Achilles
+## Forge vs Kirin vs Achilles
 
-Forge and Achilles must remain separate.
+Forge, Kirin, and Achilles must remain separate.
 
-- Forge is the technical builder.
+- Forge is the technical builder for tools, apps, scripts, dashboards, prototypes, and implementation support.
+- Kirin is the content creation and creative strategy owner.
 - Achilles is the Notion/system architect.
 
-Use Achilles for structure and workflow design. Use Forge for technical implementation.
+Use Kirin for creative/content direction. Use Achilles for structure and workflow design. Use Forge for technical implementation.
 
 ## Response Style
 

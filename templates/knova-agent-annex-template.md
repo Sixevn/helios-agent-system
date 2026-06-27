@@ -34,6 +34,13 @@ Rule:
 - owner: Midas
 - risk_or_blocker:
 
+## Vantage Annex
+- signal:
+- decision:
+- next_action:
+- owner: Vantage
+- risk_or_blocker:
+
 ## Vitalis Annex
 - signal:
 - decision:

@@ -36,11 +36,19 @@ Upside:
 
 Downside:
 
+## Business Model and Market Fit (Vantage)
+
+Market:
+
+Competitors:
+
+Go/no-go view:
+
 ## Execution Angle (Kirin)
 
 ## Owner Agent
 
-Helios / Forge / Achilles / Atlas / Midas / Vitalis / Strategos / Kirin / Orion
+Helios / Forge / Achilles / Atlas / Midas / Vitalis / Strategos / Vantage / Kirin / Orion
 
 ## Stage
 

@@ -8,7 +8,7 @@ Read the full helios-agent-system repo.
 
 Do not write code yet.
 
-Audit whether the documentation and project structure fairly represent Helios, Forge, Achilles, Atlas, Midas, Vitalis, Strategos, Kirin, and Orion.
+Audit whether the documentation and project structure fairly represent Helios, Forge, Achilles, Atlas, Midas, Vitalis, Strategos, Vantage, Kirin, and Orion.
 
 Return:
 1. What is balanced
@@ -43,7 +43,7 @@ Read BACKLOG.md.
 
 Do not code.
 
-Check whether backlog tasks are balanced across Core Boys, Midas, Vitalis, Atlas, Strategos, Kirin, Orion, and Forge.
+Check whether backlog tasks are balanced across Core Boys, Midas, Vitalis, Atlas, Strategos, Vantage, Kirin, Orion, and Forge.
 
 Return which section is over-weighted or missing.
 

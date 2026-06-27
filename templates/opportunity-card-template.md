@@ -30,7 +30,7 @@ Content Playbook / Decision Brief / Experiment Playbook / Offer Timing Playbook 
 
 ## Owner Agent
 
-Helios / Forge / Achilles / Atlas / Midas / Vitalis / Strategos / Kirin / Orion
+Helios / Forge / Achilles / Atlas / Midas / Vitalis / Strategos / Vantage / Kirin / Orion
 
 ## Stage
 
