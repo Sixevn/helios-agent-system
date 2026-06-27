@@ -2,6 +2,20 @@
 
 Use this file to track meaningful errors in chronological order.
 
+## 2026-06-26 - Word COM export timed out during DOCX visual QA
+
+- Related project: Value World Resume Tailoring
+- Related agent: Orion / Codex
+- Category: Workflow / Environment
+- Severity: S3
+- Trigger: Exporting a tailored DOCX to PDF through hidden Microsoft Word COM automation for visual QA
+- Symptom: `ExportAsFixedFormat` hung until the shell command timeout, leaving a hidden `WINWORD.EXE` process
+- Root cause: Word COM automation can enter a blocked hidden state during unattended PDF export, likely from an internal modal/startup/file-state condition that is not visible in the tool session
+- Fix: Stopped the hidden Word process, preserved the edited DOCX, and fell back to structural DOCX validation rather than retrying indefinitely
+- Prevention rule: If Word COM export hangs once, stop hidden no-title Word automation processes, run DOCX structural checks, and do not attempt more than one retry unless visual QA is mission-critical
+- Validation: DOCX zip integrity test passed and text extraction confirmed the requested resume additions
+- Status: Prevented
+
 ## 2026-05-22 - Dev server command timeout misread as app failure
 
 - Related project: Core Boys Tracker

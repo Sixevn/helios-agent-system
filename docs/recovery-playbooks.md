@@ -97,6 +97,31 @@ This file maps known failure patterns to known recovery steps.
 - For runtime confirmation, use listener/URL checks instead of process exit status.
 - Explicitly tell the user when a timeout is expected behavior for watch/dev mode.
 
+## Playbook 6: Word COM export hangs during DOCX visual QA
+
+### Symptoms
+
+- DOCX-to-PDF export through hidden Microsoft Word automation times out.
+- A no-title `WINWORD.EXE` process remains after the shell command exits or times out.
+- The DOCX is valid, but fresh rendered PNG QA cannot be produced through Word.
+
+### Fast Recovery
+
+1. Inspect Word processes and distinguish hidden automation processes from user-visible Word windows:
+   - `Get-Process WINWORD -ErrorAction SilentlyContinue | Select-Object Id,StartTime,MainWindowTitle`
+2. Stop only no-title hidden automation processes.
+3. Run structural validation:
+   - `python -m zipfile -t <docx>`
+   - Extract paragraphs with `python-docx` and confirm expected content.
+4. If LibreOffice/`soffice` is available, use the packaged `render_docx.py` path instead of retrying Word COM.
+5. Do not retry Word COM more than once unless visual QA is mission-critical.
+
+### Prevention
+
+- Prefer the packaged LibreOffice renderer when available.
+- Use Word COM only as a fallback visual QA path.
+- Treat a Word COM timeout as an environment/tooling failure, not evidence that the DOCX content is corrupt.
+
 ## Notion Integration Path (Planning Only)
 
 When ready, mirror the error system into Notion with:
