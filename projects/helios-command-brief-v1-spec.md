@@ -36,7 +36,7 @@ Each section must use:
 
 ### Core Boys Content
 - Source: `apps/core-boys-tracker` local entries and weekly review output
-- Owner: Forge (tool output), Helios (final synthesis), Kirin (optional hook refinement)
+- Owner: Kirin (content direction and hooks), Forge/Codex (tool output only), Helios (final synthesis)
 - Required fields:
   - Best clip type this week
   - Best language/country angle

@@ -2,7 +2,7 @@
 
 ## Role
 
-Orion handles career execution: resume tailoring, job search systems, applications, interview preparation, and networking follow-through.
+Orion handles jobs, internships, career opportunities, applications, resumes, outreach, interviews, and role comparisons.
 
 ## Responsibilities
 

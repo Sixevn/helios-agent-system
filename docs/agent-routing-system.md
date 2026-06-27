@@ -6,11 +6,12 @@
 - Forge = Technical builder for code, apps, scripts, tools, and prototypes
 - Achilles = Notion and system builder for pages, databases, dashboards, templates, and workflows
 - Atlas = Researcher and information retriever for sources, files, summaries, and context
-- Midas = Finance brain for budgeting, investing, loans, fundamentals, technicals, and risk
+- Midas = Money, financial goals, investing research, career ROI, budgeting structure, and risk decisions
 - Vitalis = Health, meals, fitness, recovery, sleep, nutrition, and routine brain
-- Strategos = Strategy, planning, priorities, tradeoffs, decisions, and execution brain
-- Kirin = Creative brain for ideas, hooks, brand concepts, journaling, and reflection
-- Orion = Career brain for resumes, job applications, networking, and interview prep
+- Strategos = Strategy, goals, prioritization, decision-making, weekly focus, and tradeoff analysis
+- Vantage = Business evaluation, market mapping, competitive analysis, business model design, and go/no-go decisions
+- Kirin = Content, ventures, hooks, templates, posting systems, and creative production
+- Orion = Jobs, internships, career opportunities, applications, resumes, outreach, interviews, and role comparisons
 
 ## What Each Agent Does
 
@@ -27,19 +28,22 @@ Achilles structures Notion and system architecture: pages, databases, dashboards
 Atlas retrieves and organizes information: research, files, source summaries, and project context.
 
 ### Midas
-Midas handles finance reasoning: budgeting, investing, loans, risk, fundamentals, and technical analysis.
+Midas handles money reasoning: financial goals, investing research, career ROI, budgeting structure, and risk decisions.
 
 ### Vitalis
 Vitalis handles health and routine planning: meals, fitness, recovery, sleep, nutrition, and repeatable routines.
 
 ### Strategos
-Strategos handles priorities and decisions: weekly planning, tradeoffs, focus, and execution strategy.
+Strategos handles strategy, goals, prioritization, decision-making, weekly focus, and tradeoff analysis.
+
+### Vantage
+Vantage handles business evaluation, market mapping, competitive analysis, business model design, and go/no-go decisions.
 
 ### Kirin
-Kirin handles creative generation: ideas, hooks, concepts, naming, reflection, and brand thinking.
+Kirin handles content, ventures, hooks, templates, posting systems, and creative production.
 
 ### Orion
-Orion handles career execution: resume tailoring, job application tracking, interview preparation, and networking workflows.
+Orion handles jobs, internships, career opportunities, applications, resumes, outreach, interviews, and role comparisons.
 
 ### Claude (External Advisor)
 Claude is an external advisory model used for second-opinion writing, review, and synthesis.
@@ -51,11 +55,12 @@ Claude is not a default technical execution owner in this system.
 - Use Forge for technical implementation.
 - Use Achilles for Notion/system organization.
 - Use Atlas for research and retrieval.
-- Use Midas for finance decisions.
+- Use Midas for money, investing, budgeting, career ROI, and risk decisions.
 - Use Vitalis for wellbeing and routine systems.
-- Use Strategos for planning and prioritization.
-- Use Kirin for creative concepting.
-- Use Orion for career planning and job-search execution.
+- Use Strategos for strategy, goals, priorities, decisions, weekly focus, and tradeoffs.
+- Use Vantage for business ideas, markets, competitors, business models, and go/no-go decisions.
+- Use Kirin for content, ventures, hooks, templates, posting systems, and creative production.
+- Use Orion for jobs, internships, applications, resumes, outreach, interviews, and role comparisons.
 - Use Claude when Helios wants a second-opinion pass on writing quality, synthesis quality, or alternative framing.
 
 ## Helios Routing Rule
@@ -65,11 +70,12 @@ Helios receives the request first, then routes to the correct agent.
 - If the request needs code, tools, scripts, or apps, route to Forge.
 - If the request needs Notion systems, dashboards, templates, or organization, route to Achilles.
 - If the request needs research, summaries, files, or sources, route to Atlas.
-- If the request needs finance, budgeting, investing, loans, or risk analysis, route to Midas.
+- If the request needs money, financial goals, investing research, career ROI, budgeting structure, or risk decisions, route to Midas.
 - If the request needs health, meals, fitness, recovery, sleep, or routines, route to Vitalis.
-- If the request needs planning, priorities, tradeoffs, or decisions, route to Strategos.
-- If the request needs ideas, hooks, creativity, branding, or reflection, route to Kirin.
-- If the request needs resumes, applications, interviews, or networking systems, route to Orion.
+- If the request needs strategy, goals, prioritization, decision-making, weekly focus, or tradeoff analysis, route to Strategos.
+- If the request needs business evaluation, market mapping, competitive analysis, business model design, or go/no-go decisions, route to Vantage.
+- If the request needs content, ventures, hooks, templates, posting systems, or creative production, route to Kirin.
+- If the request needs jobs, internships, career opportunities, applications, resumes, outreach, interviews, or role comparisons, route to Orion.
 - If a second-opinion writing/review pass is needed, Helios can route to Claude as an advisory lane and then route final execution back to Achilles/Forge as needed.
 
 ## Forge vs Achilles

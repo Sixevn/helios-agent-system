@@ -278,7 +278,7 @@ Default for v1:
 
 Read-layer display must preserve owner fields using this default map:
 
-- Core Boys snapshot default owner: Forge
+- Core Boys snapshot default owner: Kirin for content direction; Forge/Codex only for technical tracker output
 - Intake Router snapshot default owner: Helios
 - Weekly priorities default owner: Strategos
 - Risk/issues section default owner: Helios

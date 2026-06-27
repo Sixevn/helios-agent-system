@@ -19,15 +19,16 @@ Use this one-click index to navigate the full system:
 - Forge = Technical builder
 - Achilles = Notion and system builder
 - Atlas = Researcher and information retriever
-- Midas = Finance brain
+- Midas = Money and risk decision brain
 - Vitalis = Health, meals, fitness, and routine brain
-- Strategos = Strategy, planning, and decision brain
-- Kirin = Creative brain
-- Orion = Career and job search brain
+- Strategos = Strategy, goals, prioritization, decisions, weekly focus, and tradeoff brain
+- Vantage = Business evaluation, market mapping, competitive analysis, business model, and go/no-go brain
+- Kirin = Content, ventures, hooks, templates, posting systems, and creative production brain
+- Orion = Jobs, internships, applications, resumes, outreach, interviews, and role comparison brain
 
 ## System Philosophy
 
-This system is not just a coding repo. It is the foundation for a personal AI operating system. Codex builds tools, but Helios routes the work, Achilles structures systems, Atlas researches, Midas handles finance, Vitalis handles wellbeing, Strategos handles decisions, Kirin handles creativity, and Orion handles career execution.
+This system is not just a coding repo. It is the foundation for a personal AI operating system. Codex builds tools, but Helios routes the work, Achilles structures systems, Atlas researches, Midas handles money and risk, Vitalis handles wellbeing, Strategos handles priorities and tradeoffs, Vantage evaluates business opportunities, Kirin handles content creation, and Orion handles career execution.
 
 ## Build Philosophy
 
@@ -44,13 +45,13 @@ This system is not just a coding repo. It is the foundation for a personal AI op
 
 ## Current Priority
 
-Core Boys International is the first practical build target because it has the clearest near-term path toward content planning, analytics, automation, and monetization.
+Knova / Life OS is the broader operating system. Core Boys International is one content/revenue experiment inside Nova/Knova, not the center of the system.
 
-Core Boys is the first build, not the only system. The Helios repo supports the full agent team and multi-project roadmap.
+Kirin owns content creation and creative production. Vantage owns business evaluation and go/no-go decisions. Forge owns technical building and implementation support.
 
-## First Practical Build Target
+## Core Boys Experiment
 
-The first practical tool should be a simple Core Boys International content tracker before building a full Life OS app.
+If Core Boys becomes the selected active experiment, the first practical support tool should be a simple Core Boys International content tracker before building a full Life OS app.
 
 The tracker should start with:
 - Content ideas
